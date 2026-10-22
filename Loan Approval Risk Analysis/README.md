@@ -74,6 +74,16 @@ The analysis investigates rejected applicants in the Fair and Good CIBIL bands t
 
 The project uses a cleaned loan approval dataset containing 4,269 applications and information about applicants, loans, financial ratios, assets, and approval decisions.
 
+The Data/ folder contains two CSV files:
+
+| File |    Description |
+|--- |---|
+|loan_approval_dataset.csv | Original dataset downloaded from Kaggle, before this project's cleaning changes.|
+|loan_approval_cleaned.csv | Cleaned dataset used for the SQL analysis. The cleaning process replaced 28 values of residential_assets_value = -100000 with 0 in Excel.|
+
+The original file is retained for reference, while the cleaned file is used for the analysis.
+
+
 ### Key Fields 
 | Field	| Description |
 |--- |---|
@@ -325,41 +335,40 @@ The minimum application threshold was used to reduce the influence of very small
 
 ## Repository Structure
 ```text
-loan-approval-risk-analysis/
+Loan Approval Risk Analysis/
 │
+├── .gitignore 
 ├── README.md
-│
 ├── Data/
-│   └── loan_approval_cleaned.csv
-│
+│   ├── loan_approval_cleaned.csv
+│   └── loan_approval_dataset.csv
+├── images/
+│   ├── overview.png
+│   ├── single-factor.png
+│   ├── cross-factor.png
+│   └── high-approval-borderline.png
 ├── loan_approval_risk_analysis.sql
-│
-├── loan_approval_risk_analysis.pbix
-│
-└── images/
-    ├── overview.png
-    ├── single-factor.png
-    ├── cross-factor.png
-    └── high-approval-borderline.png
+└── loan_approval_risk_analysis.pbix
 ```
 
 ## How to Run
-### Power BI Dashboard
-
-1. Install Microsoft Power BI Desktop.
-2. Download the final `.pbix` file.
-3. Open the file in Power BI Desktop.
-4. Navigate through the dashboard pages.
-5. Use the available slicers to explore different applicant and loan segments.
 
 ### SQL Analysis
 
-1. Open the SQL file.
-2. Import or connect to the loan dataset in MySQL.
-3. Run the queries to reproduce the analysis.
-4. Review the results used for the Power BI dashboard.
+1. In DBeaver, create the database `loan_project` (right-click Databases > Create New Database).
+2. Run the `CREATE TABLE` statement at the top of `loan_approval_risk_analysis.sql`.
+3. Import `Data/loan_approval_cleaned.csv` into the `loan_data` table (right-click the table > Import Data > CSV, and map the columns by name).
+4. Run the analytical queries. The queries need MySQL 8.0 or newer.
 
 The SQL syntax may require minor adjustments depending on the database environment.
+
+### Power BI Dashboard
+
+1. Open the `.pbix` file using Microsoft Power BI Desktop.
+2. Update the data source path to the cleaned CSV.
+3. Refresh the data if needed.
+4. Navigate through the dashboard pages.
+5. Use the available slicers to explore different applicant and loan segments.
 
 
 ## Limitations
