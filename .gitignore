@@ -1,0 +1,4 @@
+@"
+business_ques.md
+business_ques.txt
+"@ | Set-Content .gitignore
